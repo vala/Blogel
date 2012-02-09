@@ -1,7 +1,8 @@
+require 'blogel/engine/routes'
+# require File.expand_path '../engine/routes', __FILE__
+
 module Blogel
   class Engine < ::Rails::Engine
-    isolate_namespace Blogel
-    
     # On boot
     initializer 'blogel_boot_engine' do |app|
       Blogel.config do |config|
@@ -11,3 +12,4 @@ module Blogel
     end
   end
 end
+

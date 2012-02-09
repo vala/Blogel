@@ -4,9 +4,10 @@ class CreateBlogelPosts < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.text :content
-      t.boolean :published
+      t.boolean :published, :default => true
       t.datetime :published_at
-
+      t.text :additional_fields
+      
       t.timestamps
     end
   end

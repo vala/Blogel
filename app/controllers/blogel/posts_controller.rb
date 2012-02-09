@@ -1,6 +1,7 @@
 module Blogel
-  class PostsController < ApplicationController
-    before_filter :"authorize_#{Blogel.user_model_name.underscore}!"
+  class PostsController < ::ApplicationController
+    before_filter :"authorize_#{Blogel.user_model_name.underscore}!", :only => [:comment]
+    layout Blogel.blog_layout
     
     def index
       @posts = Post.ordered

@@ -3,14 +3,16 @@ require File.expand_path('../utils', __FILE__)
 module Blogel
   class InstallGenerator < Rails::Generators::Base
     include Generators::Utils::InstanceMethods
+    # Copied files come from templates folder
     source_root File.expand_path('../templates', __FILE__)
+    # What's that generator ?
     desc "Blogel install generator"
     
     def welcome
-      do_say "Proceding to Blogel's installation", :green
+      do_say "Proceding to Blogel's installation"
     end
     
-    # The devise check code comes from RailsAdmin install generator
+    # Check if rails admin exists
     def rails_admin_check
       do_say "Checking if Rails Admin is present ..."
 
@@ -42,8 +44,8 @@ module Blogel
     
     def mount_engine
       mount_path = ask("Where would you like to mount Blogel engine ? [/blog]").presence || '/blog'
-      gsub_file "config/routes.rb", /mount Blogel::Engine => \'\/?.*\', :as => \'blogel\'/, ''
-      route "mount Blogel::Engine => '#{mount_path.match(/^\//) ? mount_path : "/#{mount_path}"}', :as => 'blogel'"
+      gsub_file "config/routes.rb", /blogel_at \'\/?.*\'/, ''
+      route "blogel_at '#{mount_path.match(/^\//) ? mount_path : "/#{mount_path}"}'"
     end
   end
 end

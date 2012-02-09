@@ -5,7 +5,7 @@ class CreateBlogelCategories < ActiveRecord::Migration
       t.string :slug
       t.integer :parent_id
       t.text :description
-      t.integer :display_order_index
+      t.integer :display_order_index, :default => 1
       
       t.timestamps
     end

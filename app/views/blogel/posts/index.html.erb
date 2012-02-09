@@ -1,29 +1,3 @@
 <% @posts.each do |post| %>
-	
-	<div class="post_container<%= post.image? ' post_with_image' : '' %>" id="post-<%= post.id %>">
-		<div class="post_header">
-			<% if post.image? %>
-				<div class="post_left_column">
-					<%= image_tag post.image.url(:thumb), post.title %>
-				</div>
-			<% end %>
-			<div class="post_right_column">
-				<%= post.title %>
-			</div>
-		</div>
-		<div class="post_content">
-			<div class="post_left_column">
-				<div class="post_published_on">
-					<%= "#{t('glysellin.labels.published_on')}" %>
-				</div>
-			</div>
-			<div class="post_right_column">
-				
-			</div>
-		</div>
-		<div class="post_footer">
-			
-		</div>
-	</div>
-	
+	<%= render :partial => 'post', :locals => {:post => post, :excerpt => true} %>
 <% end %>
