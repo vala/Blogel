@@ -1,0 +1,7 @@
+en:
+  blogel:
+    messages:
+      comment_successfully_added: Your comment has been succesfully added
+      
+    labels:
+      published_on: Published on
