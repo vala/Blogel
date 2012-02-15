@@ -16,6 +16,10 @@ module Blogel
   mattr_accessor :additional_post_fields
   @@additional_post_fields = []
   
+  # Fields to search with search action in posts controller
+  mattr_accessor :post_search_fields
+  @@post_search_fields = [:title, :content]
+  
   # Add more styles to post images
   mattr_accessor :additional_post_image_styles
   @@additional_post_image_styles = {}

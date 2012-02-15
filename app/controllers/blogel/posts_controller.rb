@@ -8,9 +8,15 @@ module Blogel
     end
     
     def filter
-      @posts = Post.from_category(params[:category])
+      @current_category = params[:category]
+      @posts = Post.from_category(params[:category], true)
     end
-  
+    
+    def search
+      @search_terms = params[:q]
+      @posts = Post.search_for(params[:q]).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
+    end
+    
     def show
       @post = Post.find_by_slug(params[:id])
     end

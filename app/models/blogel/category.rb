@@ -15,6 +15,7 @@ module Blogel
     scope :ordered, order('display_order_index ASC')
     
     validates_presence_of :name, :slug
+    attr_readonly :slug
     
     before_validation do
       self.slug = self.name.to_slug

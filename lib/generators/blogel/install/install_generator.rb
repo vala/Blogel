@@ -39,7 +39,7 @@ module Blogel
     
     def copy_migrations
       do_say "Installing migrations, don't forget to `rake db:migrate`"
-      rake "blogel:install:migrations"
+      rake "blogel_engine:install:migrations"
     end
     
     def mount_engine

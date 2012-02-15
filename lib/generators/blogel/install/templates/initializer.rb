@@ -8,6 +8,9 @@ Blogel.config do |config|
   # Add additional fields to the posts with ActiveRecord::Base.store
   # config.additional_post_fields = [:subtitle]
   
+  # Set which posts fields should be searched
+  # config.post_search_fields = [:title, :content]
+  
   # Add additional paperclip image styles to posts' main images
   # config.additional_post_image_styles
   

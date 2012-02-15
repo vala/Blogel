@@ -2,7 +2,9 @@ en:
   blogel:
     messages:
       comment_successfully_added: Your comment has been succesfully added
-      
+      no_results_from_search: "No search results"
+      search_terms: "Your search"
+      did_not_match_any_results: "did not match any result in the blog."
     labels:
       published_on: Published on
       view_more: View more

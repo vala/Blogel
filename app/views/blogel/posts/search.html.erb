@@ -1,0 +1,14 @@
+<% if @posts.length > 0 %>
+	<% @posts.each do |post| %>
+		<%= render :partial => 'post', :locals => {:post => post, :excerpt => true} %>
+	<% end %>
+<% else %>
+	<div id="no_search_results">
+		<h2><%= t('blogel.messages.no_results_from_search') %></h2>
+		<p>
+			<%= t('blogel.messages.search_terms') %> <strong><%= @search_terms %></strong> <%= t('blogel.messages.did_not_match_any_results') %>
+		</p>
+		<%= link_to t('blogel.labels.misc.go_back'), :back %>
+	</div>
+	
+<% end %>
