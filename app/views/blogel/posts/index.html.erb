@@ -1,3 +1,8 @@
-<% @posts.each do |post| %>
-	<%= render :partial => 'post', :locals => {:post => post, :excerpt => true} %>
+<% if @posts.length > 0 %>
+	<% @posts.each do |post| %>
+		<%= render :partial => 'post', :locals => {:post => post, :excerpt => true} %>
+	<% end %>
+<% else %>
+	<%= t('blogel.labels.posts.no_posts_were_found') %>
 <% end %>
+

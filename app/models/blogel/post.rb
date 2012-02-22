@@ -64,13 +64,15 @@ module Blogel
     end    
 
     def breadcrumbs include_article_title = false
-      parents = [categories.first.name]
-      cat = categories.first
-      while cat.parent_category
-        cat = cat.parent_category
-        parents.unshift(cat.name)
-      end
-      parents
+      @_breadcrumbs ||= lambda {
+        parents = [categories.first.name]
+        cat = categories.first
+        while cat.parent_category
+          cat = cat.parent_category
+          parents.unshift(cat.name)
+        end
+        parents
+      }.call
     end
   end
 end

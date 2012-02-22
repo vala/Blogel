@@ -8,5 +8,7 @@ fr:
     labels:
       misc:
         go_back: "Retour"
-      published_on: "Publié le"
-      view_more: "Lire la suite"
+      posts:
+        published_on: "Publié le"
+        view_more: "Lire la suite"
+        no_posts_were_found: "Aucun article n'a été trouvé"

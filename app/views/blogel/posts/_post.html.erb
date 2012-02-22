@@ -14,13 +14,13 @@
 	<div class="post_content">
 		<div class="post_left_column">
 			<div class="post_published_on">
-				<%= t('blogel.labels.published_on') %>: <%= post.published_at %>
+				<%= t('blogel.labels.posts.published_on') %>: <%= post.published_at %>
 			</div>
 		</div>
 		<div class="post_right_column">
 			<% if excerpt %>
 				<%= post.excerpt(true) %>
-				<%= link_to t('blogel.labels.view_more'), post_path(post) %>
+				<%= link_to t('blogel.labels.posts.view_more'), post_path(post) %>
 			<% else %>
 				<%= post.content %>
 			<% end %>
