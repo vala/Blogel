@@ -63,15 +63,19 @@ module Blogel
       end
     end    
 
-    def breadcrumbs include_article_title = false
+    def breadcrumbs include_article_title = false, show_uncategorized = true
       @_breadcrumbs ||= lambda {
-        parents = [categories.first.name]
-        cat = categories.first
-        while cat.parent_category
-          cat = cat.parent_category
-          parents.unshift(cat.name)
+        if categories.first
+          parents = [categories.first.name]
+          cat = categories.first
+          while cat.parent_category
+            cat = cat.parent_category
+            parents.unshift(cat.name) if cat
+          end
+          parents
+        else 
+          [I18n.t('blogel.labels.posts.uncategorized')]
         end
-        parents
       }.call
     end
   end

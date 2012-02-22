@@ -6,5 +6,15 @@ en:
       search_terms: "Your search"
       did_not_match_any_results: "did not match any result in the blog."
     labels:
-      published_on: Published on
-      view_more: View more
+      misc:
+        go_back: "Go Back"
+        search: "Recherche"
+        do_search: "Rechercher"
+      posts:
+        published_on: Published on
+        view_more: View more
+        no_posts_were_found: "No posts were found"
+        uncategorized: "Uncategorized"
+      pages:
+        title:
+          posts: "Blog posts"
