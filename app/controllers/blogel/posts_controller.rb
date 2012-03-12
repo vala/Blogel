@@ -18,10 +18,17 @@ module Blogel
       end
     end
     
+    def filter_by_tag
+      @tag = Tag.find(params[:tag_id])
+      @posts = @tag.posts.order('created_at DESC')
+      page_title t('blogel.labels.titles.tags', :tag => @tag.name)
+      render 'filter'
+    end
+    
     def search
       @search_terms = params[:q]
       @posts = Post.search_for(params[:q]).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
-      page_title "#{I18n.t('blogel.labels.misc.search')} : #{params[:q]}"
+      page_title t('blogel.labels.titles.search', :terms => params[:q])
     end
     
     def show

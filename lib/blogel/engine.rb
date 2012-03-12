@@ -1,5 +1,8 @@
-require 'blogel/engine/routes'
-# require File.expand_path '../engine/routes', __FILE__
+if File.exists? 'blogel/engine/routes'
+  require 'blogel/engine/routes'
+else
+  require File.expand_path '../engine/routes', __FILE__
+end
 
 module Blogel
   class Engine < ::Rails::Engine

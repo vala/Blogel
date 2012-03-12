@@ -27,5 +27,12 @@
 		</div>
 	</div>
 	<div class="post_footer">
+		<div class="post_tags">
+			<% if post.tags.length > 0 %>
+				<% post.tags.each do |tag| %>
+					<%= link_to tag.name, tagged_posts_path(tag), :class => 'post_tag' %>
+				<% end %>
+			<% end %>
+		</end>
 	</div>
 </div>

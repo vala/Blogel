@@ -1,0 +1,16 @@
+<h1><%= t('blogel.labels.titles.tags_glossary') %></h1>
+<article class="post_container tags_glossary">
+	<% @tags.each do |letter, tags| %>
+		<% if tags.length > 0 %>
+			<div class="tag_letter_container">
+				<h3><%= letter.capitalize %>
+				<ul class="">
+					<% tags.each do |tag| %>
+						<li class="tag">
+							<%= link_to tag.name, tagged_posts_path(tag) %>
+						</li>
+					<% end %>
+				</ul>
+		<% end %>
+	<% end %>
+</article>

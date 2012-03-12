@@ -6,6 +6,9 @@ en:
       search_terms: "Your search"
       did_not_match_any_results: "did not match any result in the blog."
     labels:
+      titles:
+        search: "Search : %{terms}"
+        tags: "Posts for tag : %{tag}"
       misc:
         go_back: "Go Back"
         search: "Recherche"

@@ -6,11 +6,13 @@ module ActionDispatch::Routing
           collection do
             get 'search', :action => 'search', :as => 'search'
             get 'filter/:category', :action => 'filter', :as => 'filter'
+            get 'tags/:tag_id', :action => 'filter_by_tag', :as => 'tagged'
           end
           member do
             post 'comment', :action => 'comment', :as => 'comment'
           end
         end
+        resources :tags, :only => [:index]
         root :to => 'posts#index'
       end
     end
