@@ -28,6 +28,10 @@ module Blogel
   mattr_accessor :blog_layout
   @@blog_layout = 'application'
   
+  # Number of posts shown per page ... yes !
+  mattr_accessor :posts_per_page
+  @@posts_per_page = 10
+  
   # Config block for the initializer
   def self.config
     yield self

@@ -5,12 +5,12 @@ module Blogel
     layout Blogel.blog_layout
     
     def index
-      @posts = Post.ordered
+      @posts = Post.page(@page_number).ordered
     end
     
     def filter
       @current_category = params[:category]
-      @posts = Post.from_category(params[:category], true)
+      @posts = Post.from_category(params[:category], @page_number, true)
       if @posts.length > 0
         page_title @posts.first.breadcrumbs.join(' / ')
       else
@@ -20,14 +20,14 @@ module Blogel
     
     def filter_by_tag
       @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts.order('created_at DESC')
+      @posts = @tag.posts.page(@page_number).order('created_at DESC')
       page_title t('blogel.labels.titles.tags', :tag => @tag.name)
       render 'filter'
     end
     
     def search
       @search_terms = params[:q]
-      @posts = Post.search_for(params[:q]).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
+      @posts = Post.search_for(params[:q]).page(@page_number).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
       page_title t('blogel.labels.titles.search', :terms => params[:q])
     end
     
@@ -48,7 +48,8 @@ module Blogel
     
     protected
       def init
-        page_title = nil
+        page_title nil
+        @page_number = params[:page] || 1
       end
       
       def page_title title

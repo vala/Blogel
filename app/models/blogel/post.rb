@@ -6,6 +6,8 @@ module Blogel
     include ActionView::Helpers::TagHelper
     self.table_name = 'blogel_posts'
     
+    paginates_per Blogel.posts_per_page
+    
     # Parent categories, can be several
     has_and_belongs_to_many :categories, :join_table => "blogel_categories_posts", :foreign_key => "post_id"
     has_and_belongs_to_many :tags, :join_table => "blogel_posts_tags", :foreign_key => 'post_id'
@@ -33,10 +35,10 @@ module Blogel
     end
 
     # Get all posts from some category, optionally with it's subcategories' posts
-    def self.from_category category_id, fetch_from_subcategories = false
+    def self.from_category category_id, page_number = 1, fetch_from_subcategories = false
       cat = Category.includes(:children_categories, :posts).where((category_id.kind_of?(String) ? :slug : :id) => category_id).first
       if cat
-        Category.includes(:posts).where('id IN (?)', cat.children_categories.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children_categories.map(&:id)) : [cat.id]).map {|c| c.posts.order('published_at DESC, created_at DESC')}.flatten
+        Category.includes(:posts).page(page_number).where('id IN (?)', cat.children_categories.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children_categories.map(&:id)) : [cat.id]).map {|c| c.posts.order('published_at DESC, created_at DESC')}.flatten
       else
         []
       end

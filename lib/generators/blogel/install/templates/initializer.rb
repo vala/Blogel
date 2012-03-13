@@ -8,6 +8,9 @@ Blogel.config do |config|
   # Add additional fields to the posts with ActiveRecord::Base.store
   # config.additional_post_fields = [:subtitle]
   
+  # Sets how much posts you want to show per page on all listing pages (index, filter, search)
+  # config.post_per_page = 10
+  
   # Set which posts fields should be searched
   # config.post_search_fields = [:title, :content]
   
