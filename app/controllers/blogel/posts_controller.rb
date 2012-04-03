@@ -27,7 +27,7 @@ module Blogel
     
     def search
       @search_terms = params[:q]
-      @posts = Post.search_for(params[:q]).page(@page_number).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
+      @posts = Post.search_for(params[:q]).order('created_at DESC').page(@page_number).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
       page_title t('blogel.labels.titles.search', :terms => params[:q])
     end
     
