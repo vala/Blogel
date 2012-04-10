@@ -38,7 +38,7 @@ module Blogel
     def self.from_category category_id, page_number = 1, fetch_from_subcategories = false
       cat = Category.includes(:children_categories, :posts).where((category_id.kind_of?(String) ? :slug : :id) => category_id).first
       if cat
-        Category.includes(:posts).page(page_number).where('id IN (?)', cat.children_categories.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children_categories.map(&:id)) : [cat.id]).map {|c| c.posts.order('published_at DESC, created_at DESC')}.flatten
+        Category.includes(:posts).page(page_number).where('id IN (?)', cat.children_categories.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children_categories.map(&:id)) : [cat.id]).map {|c| c.posts.includes(:tags, :categories, :comments).order('published_at DESC, created_at DESC')}.flatten
       else
         []
       end

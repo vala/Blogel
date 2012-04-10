@@ -5,7 +5,7 @@ module Blogel
     layout Blogel.blog_layout
     
     def index
-      @posts = Post.page(@page_number).ordered
+      @posts = Post.includes(:tags, :categories, :comments).page(@page_number).ordered
     end
     
     def filter
@@ -20,14 +20,14 @@ module Blogel
     
     def filter_by_tag
       @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts.page(@page_number).order('created_at DESC')
+      @posts = @tag.posts.includes(:tags, :categories, :comments).page(@page_number).order('created_at DESC')
       page_title t('blogel.labels.titles.tags', :tag => @tag.name)
       render 'filter'
     end
     
     def search
       @search_terms = params[:q]
-      @posts = Post.search_for(params[:q]).order('created_at DESC').page(@page_number).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
+      @posts = Post.search_for(params[:q]).includes(:tags, :categories, :comments).order('created_at DESC').page(@page_number).each {|post| post.highlight_search_terms!(params[:q], :span, :class => 'found_search_term')}
       page_title t('blogel.labels.titles.search', :terms => params[:q])
     end
     

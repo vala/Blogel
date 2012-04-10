@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Blogel.config do |config|
   # Define your user model here
   # config.user_model = Blogel::BlogUser
@@ -34,6 +36,7 @@ Blogel.config do |config|
           field :title
           field :published
           field :categories
+          field :image
           field :content do
             if defined? Ckeditor
               ckeditor true
@@ -50,7 +53,7 @@ Blogel.config do |config|
         
         edit do
           field :name
-          field :parent
+          field :parent_category
           field :display_order_index
           field :description
         end
