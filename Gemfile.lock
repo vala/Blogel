@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blogel (0.0.1)
+    blogel (0.1)
       kaminari
       paperclip
       rails (~> 3.2.1)
@@ -59,9 +59,10 @@ GEM
     mime-types (1.18)
     multi_json (1.0.4)
     mysql2 (0.3.11)
-    paperclip (2.7.0)
-      activerecord (>= 2.3.0)
-      activesupport (>= 2.3.2)
+    paperclip (3.0.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
     polyglot (0.3.3)
@@ -101,7 +102,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.32)
+    tzinfo (0.3.33)
 
 PLATFORMS
   ruby

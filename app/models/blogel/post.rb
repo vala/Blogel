@@ -11,6 +11,7 @@ module Blogel
     # Parent categories, can be several
     has_and_belongs_to_many :categories, :join_table => "blogel_categories_posts", :foreign_key => "post_id"
     has_and_belongs_to_many :tags, :join_table => "blogel_posts_tags", :foreign_key => 'post_id'
+    belongs_to :user, :class_name => Blogel.user_model_name, :foreign_key => 'user_id'
     has_many :comments
     
     store :additional_fields, :accessors => Blogel.additional_post_fields
