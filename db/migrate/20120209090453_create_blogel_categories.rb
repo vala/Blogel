@@ -6,8 +6,10 @@ class CreateBlogelCategories < ActiveRecord::Migration
       t.integer :parent_id
       t.text :description
       t.integer :display_order_index, :default => 1
-      
+
       t.timestamps
     end
+
+    add_index :blogel_categories, :slug, unique: true
   end
 end

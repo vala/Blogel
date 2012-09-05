@@ -7,8 +7,10 @@ class CreateBlogelPosts < ActiveRecord::Migration
       t.boolean :published, :default => true
       t.datetime :published_at
       t.text :additional_fields
-      
+
       t.timestamps
     end
+
+    add_index :blogel_posts, :slug, unique: true
   end
 end

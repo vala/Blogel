@@ -2,24 +2,25 @@ require 'scoped_search'
 
 module Blogel
   class Post < ActiveRecord::Base
-    include Blogel::ModelInstanceHelperMethods
+    extend FriendlyId
     include ActionView::Helpers::TagHelper
     self.table_name = 'blogel_posts'
-    
+
+    friendly_id :title, use: :slugged
+
     paginates_per Blogel.posts_per_page
-    
+
     # Parent categories, can be several
     has_and_belongs_to_many :categories, :join_table => "blogel_categories_posts", :foreign_key => "post_id"
     has_and_belongs_to_many :tags, :join_table => "blogel_posts_tags", :foreign_key => 'post_id'
     belongs_to :user, :class_name => Blogel.user_model_name, :foreign_key => 'user_id'
     has_many :comments
-    
+
     store :additional_fields, :accessors => Blogel.additional_post_fields
     scoped_search :on => Blogel.post_search_fields
-    
-    validates_presence_of :title, :slug, :content
-    attr_readonly :slug
-    
+
+    validates_presence_of :title, :content
+
     # Main image for the post
     has_attached_file :image,
       :styles => {
@@ -29,9 +30,8 @@ module Blogel
     # Get all posts ordered by publish date
     scope :ordered, order('published_at DESC, created_at DESC')
 
-    # Ensure the post is slugged
+    # Ensure publication date
     before_validation do
-      self.slug = self.title.to_slug
       self.published_at = Time.now unless self.published_at
     end
 
@@ -65,7 +65,7 @@ module Blogel
         end
         "#{content[0, i]}#{add_dots ? ' ...' : ''}"
       end
-    end    
+    end
 
     def breadcrumbs include_article_title = false, show_uncategorized = true
       @_breadcrumbs ||= lambda {
@@ -77,7 +77,7 @@ module Blogel
             parents.unshift(cat.name) if cat
           end
           parents
-        else 
+        else
           [I18n.t('blogel.labels.posts.uncategorized')]
         end
       }.call
