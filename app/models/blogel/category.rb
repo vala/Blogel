@@ -16,5 +16,7 @@ module Blogel
     scope :ordered, order('display_order_index ASC')
 
     validates_presence_of :name
+
+    attr_accessible :parent_category, :children_categories, :posts, :post_ids, :description, :name
   end
 end
