@@ -30,6 +30,9 @@ module Blogel
     # Get all posts ordered by publish date
     scope :ordered, order('published_at DESC, created_at DESC')
 
+    # Add attributes accessible
+    attr_accessible :title, :content, :published, :published_at, :image, :categories, :category_ids, :tags, :tag_ids, :comments, :comment_ids, :user, :user_id
+
     # Ensure publication date
     before_validation do
       self.published_at = Time.now unless self.published_at
