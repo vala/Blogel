@@ -68,11 +68,13 @@ module Blogel
     end
 
     def breadcrumbs include_article_title = false, show_uncategorized = true
+      i = 0
       @_breadcrumbs ||= lambda {
         if categories.first
           parents = [categories.first.name]
           cat = categories.first
-          while cat.parent_category
+          while cat.parent_category && i < 3
+            i += 1
             cat = cat.parent_category
             parents.unshift(cat.name) if cat
           end
