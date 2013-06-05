@@ -1,0 +1,14 @@
+<% if categories.length > 0 %>
+  <%- categories.each do |category| %>
+    <ul>
+      <li>
+        <%= link_to category.name, filter_posts_path(category.slug) %>
+        <ul>
+          <%- category.children.ordered.each do |sub_category| %>
+            <%= render :partial => 'sub_category', :locals => {:sub_category => sub_category} %>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

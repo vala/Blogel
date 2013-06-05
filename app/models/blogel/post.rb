@@ -40,9 +40,9 @@ module Blogel
 
     # Get all posts from some category, optionally with it's subcategories' posts
     def self.from_category category_id, page_number = 1, fetch_from_subcategories = false
-      cat = Category.includes(:children_categories, :posts).where((category_id.kind_of?(String) ? :slug : :id) => category_id).first
+      cat = Category.includes(:posts).where((category_id.kind_of?(String) ? :slug : :id) => category_id).first
       if cat
-        Category.includes(:posts).page(page_number).where('id IN (?)', cat.children_categories.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children_categories.map(&:id)) : [cat.id]).map {|c| c.posts.includes(:tags, :categories, :comments).order('published_at DESC, created_at DESC')}.flatten
+        Category.includes(:posts).page(page_number).where('id IN (?)', cat.children.length > 0 && fetch_from_subcategories ? [cat.id].concat(cat.children.map(&:id)) : [cat.id]).map {|c| c.posts.includes(:tags, :categories, :comments).order('published_at DESC, created_at DESC')}.flatten
       else
         []
       end
@@ -72,11 +72,11 @@ module Blogel
 
     def breadcrumbs include_article_title = false, show_uncategorized = true
       @_breadcrumbs ||= lambda {
-        if categories.first
-          parents = [categories.first.name]
+        if categories.parent
+          parents = [categories.parent.name]
           cat = categories.first
-          while cat.parent_category
-            cat = cat.parent_category
+          while cat.parent
+            cat = cat.parent
             parents.unshift(cat.name) if cat
           end
           parents
