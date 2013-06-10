@@ -16,7 +16,7 @@ And for sure, contributions are always welcome if it's useful to you !
 
 ```ruby
   gem "ancestry"
-	gem "blogel", :git => "git@github.com:xana68/blogel"
+  gem "blogel", :git => "git@github.com:xana68/blogel"
 ```
 
 2. Launch the install generator and tell where to mount blogel !
